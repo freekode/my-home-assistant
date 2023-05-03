@@ -11,19 +11,21 @@ services:
     environment:
       - TZ=Europe/Warsaw
 
-  # zigbee2mqtt:
-  #   image: koenkk/zigbee2mqtt
-  #   restart: unless-stopped
-  #   privileged: true
-  #   ports:
-  #     - 1881:8080
-  #   volumes:
-  #     - ./zigbee2mqtt:/app/data
-  #     - /run/udev:/run/udev:ro
-  #   devices:
-  #     - /dev/ttyACM0:/dev/ttyACM0
-  #   environment:
-  #     - TZ=Europe/Warsaw
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt
+    restart: unless-stopped
+    privileged: true
+    depends_on:
+      - mosquitto
+    ports:
+      - 1881:8080
+    volumes:
+      - ./zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    environment:
+      - TZ=Europe/Warsaw
 
   # node-red:
   #   image: 'nodered/node-red:latest'
@@ -35,14 +37,14 @@ services:
   #   environment:
   #     - TZ=Europe/Warsaw
 
-  # mosquitto:
-  #   image: library/eclipse-mosquitto:1.6.13
-  #   restart: unless-stopped
-  #   ports:
-  #     - 1883:1883
-  #     - 9001:9001
-  #   environment:
-  #     - TZ=Europe/Warsaw
+  mosquitto:
+    image: library/eclipse-mosquitto:1.6.13
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    environment:
+      - TZ=Europe/Warsaw
 
   # db:
   #   image: library/postgres
@@ -55,4 +57,5 @@ services:
   #    - POSTGRES_USER=home-assistant
   #    - POSTGRES_PASSWORD=root
   #    - POSTGRES_DB=home-assistant
+
 
