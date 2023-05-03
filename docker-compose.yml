@@ -1,61 +1,58 @@
 version: '3'
+
 services:
   home-assistant:
-    container_name: 'home-assistant'
     image: ghcr.io/home-assistant/home-assistant:stable
-    restart: always
+    restart: unless-stopped
     network_mode: host
     privileged: true
-    depends_on:
-      - db
     volumes:
       - ./home-assistant:/config
-    devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
     environment:
       - TZ=Europe/Warsaw
-  node-red:
-    container_name: 'node-red'
-    image: 'nodered/node-red:latest'
-    restart: always
-    ports:
-      - 1880:1880
-    volumes:
-      - ./node-red:/data
-    environment:
-      - TZ=Europe/Warsaw
-  zigbee2mqtt:
-    container_name: 'zigbee2mqtt'
-    image: koenkk/zigbee2mqtt
-    restart: always
-    privileged: true
-    ports:
-      - 1881:8080
-    volumes:
-      - ./zigbee2mqtt:/app/data
-      - /run/udev:/run/udev:ro
-    devices:
-      - /dev/ttyACM0:/dev/ttyACM0
-    environment:
-      - TZ=Europe/Warsaw
-  mosquitto:
-    container_name: 'mosquitto'
-    image: library/eclipse-mosquitto:1.6.13
-    restart: always
-    ports:
-      - 1883:1883
-      - 9001:9001
-    environment:
-      - TZ=Europe/Warsaw
-  db:
-    container_name: 'home-assistant_db'
-    image: library/postgres
-    restart: always
-    volumes:
-      - ./db:/var/lib/postgresql/data
-    ports:
-      - 15432:5432
-    environment:
-     - POSTGRES_USER=home-assistant
-     - POSTGRES_PASSWORD=root
-     - POSTGRES_DB=home-assistant
+
+  # zigbee2mqtt:
+  #   image: koenkk/zigbee2mqtt
+  #   restart: unless-stopped
+  #   privileged: true
+  #   ports:
+  #     - 1881:8080
+  #   volumes:
+  #     - ./zigbee2mqtt:/app/data
+  #     - /run/udev:/run/udev:ro
+  #   devices:
+  #     - /dev/ttyACM0:/dev/ttyACM0
+  #   environment:
+  #     - TZ=Europe/Warsaw
+
+  # node-red:
+  #   image: 'nodered/node-red:latest'
+  #   restart: unless-stopped
+  #   ports:
+  #     - 1880:1880
+  #   volumes:
+  #     - ./node-red:/data
+  #   environment:
+  #     - TZ=Europe/Warsaw
+
+  # mosquitto:
+  #   image: library/eclipse-mosquitto:1.6.13
+  #   restart: unless-stopped
+  #   ports:
+  #     - 1883:1883
+  #     - 9001:9001
+  #   environment:
+  #     - TZ=Europe/Warsaw
+
+  # db:
+  #   image: library/postgres
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./db:/var/lib/postgresql/data
+  #   ports:
+  #     - 15432:5432
+  #   environment:
+  #    - POSTGRES_USER=home-assistant
+  #    - POSTGRES_PASSWORD=root
+  #    - POSTGRES_DB=home-assistant
+
