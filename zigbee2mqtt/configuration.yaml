@@ -1,0 +1,38 @@
+homeassistant: true
+permit_join: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mosquitto
+advanced:
+  log_level: warn
+  log_rotation: true
+  log_directory: /app/data/log/
+  ikea_ota_use_test_url: false
+  log_syslog:
+    app_name: Zigbee2MQTT
+    eol: /n
+    host: localhost
+    localhost: localhost
+    path: /dev/log
+    pid: process.pid
+    port: 123
+    protocol: tcp4
+    type: '5424'
+  log_file: zigbee2mqtt.log
+  last_seen: ISO_8601
+frontend:
+  port: 8080
+serial:
+  port: /dev/ttyACM0
+  disable_led: true
+devices:
+  '0x00158d0006c4f0aa':
+    friendly_name: water_leak_one
+    retain: true
+  '0x00124b00226810ff':
+    friendly_name: temp_sonoff_one
+availability: true
+groups:
+  '111':
+    friendly_name: mine
+    devices: []
