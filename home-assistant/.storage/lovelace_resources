@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866244",
+        "type": "module",
+        "id": "bb4fcfafe8a24e99ad0681d2915365aa"
+      },
+      {
+        "url": "/hacsfiles/apexcharts-card/apexcharts-card.js?hacstag=331701152204",
+        "type": "module",
+        "id": "89ff36479ede40958880abcd20046a42"
+      },
+      {
+        "url": "/hacsfiles/platinum-weather-card/platinum-weather-card.js?hacstag=488086721105",
+        "type": "module",
+        "id": "a8488b3d8cb8412abcbf8b71374463ce"
+      }
+    ]
+  }
+}

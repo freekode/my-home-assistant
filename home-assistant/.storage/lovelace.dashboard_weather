@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_weather",
+  "data": {
+    "config": {
+      "title": "Home",
+      "views": [
+        {
+          "path": "default_view",
+          "title": "Home",
+          "type": "custom:horizontal-layout",
+          "layout": {
+            "max_cols": 3
+          },
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "title": "Forecast",
+              "cards": [
+                {
+                  "card_config_version": 8,
+                  "entity_apparent_temp": "sensor.openweathermap_feels_like_temperature",
+                  "entity_forecast_icon": "weather.openweathermap",
+                  "entity_forecast_icon_1": "weather.openweathermap",
+                  "entity_forecast_max": "weather.openweathermap",
+                  "entity_forecast_max_1": "weather.openweathermap",
+                  "entity_forecast_min": "weather.openweathermap",
+                  "entity_forecast_min_1": "weather.openweathermap",
+                  "entity_humidity": "sensor.temp_sonoff_one_humidity",
+                  "entity_pop": "weather.openweathermap",
+                  "entity_pop_1": "weather.openweathermap",
+                  "entity_pos": "weather.openweathermap",
+                  "entity_pos_1": "weather.openweathermap",
+                  "entity_summary": "weather.openweathermap",
+                  "entity_summary_1": "weather.openweathermap",
+                  "entity_sun": "sun.sun",
+                  "entity_temperature": "sensor.temp_sonoff_one_temperature",
+                  "entity_update_time": "sensor.openweathermap_forecast_time",
+                  "entity_wind_bearing": "weather.openweathermap",
+                  "entity_wind_speed": "weather.openweathermap",
+                  "section_order": [
+                    "overview",
+                    "extended",
+                    "slots",
+                    "daily_forecast"
+                  ],
+                  "show_section_extended": false,
+                  "slot_l1": "forecast_max",
+                  "slot_l2": "forecast_min",
+                  "slot_l3": "sun_next",
+                  "slot_l4": "sun_following",
+                  "slot_l5": "remove",
+                  "slot_l6": "remove",
+                  "slot_l7": "remove",
+                  "slot_l8": "remove",
+                  "slot_r1": "wind",
+                  "slot_r2": "popforecast",
+                  "slot_r3": "humidity",
+                  "slot_r4": "remove",
+                  "slot_r5": "remove",
+                  "slot_r6": "remove",
+                  "slot_r7": "remove",
+                  "slot_r8": "remove",
+                  "type": "custom:platinum-weather-card",
+                  "update_time_use_attr": false
+                },
+                {
+                  "type": "custom:apexcharts-card",
+                  "header": {
+                    "show": true,
+                    "title": "Precipitation",
+                    "colorize_states": true
+                  },
+                  "graph_span": "2d-2h",
+                  "span": {
+                    "start": "hour"
+                  },
+                  "apex_config": {
+                    "xaxis": {
+                      "labels": {
+                        "format": "dd-MMM"
+                      }
+                    }
+                  },
+                  "yaxis": [
+                    {
+                      "id": "precipitation",
+                      "min": 0,
+                      "opposite": true
+                    },
+                    {
+                      "id": "probability"
+                    }
+                  ],
+                  "series": [
+                    {
+                      "entity": "weather.openweathermap_hourly",
+                      "name": "Precipitation",
+                      "type": "column",
+                      "stroke_width": 2,
+                      "curve": "straight",
+                      "extend_to": false,
+                      "unit": "mm",
+                      "yaxis_id": "precipitation",
+                      "color": "#32cd32",
+                      "show": {
+                        "legend_value": false
+                      },
+                      "data_generator": "return entity.attributes.forecast.map((entry) => {\n  return [new Date(entry.datetime), entry.precipitation];\n});\n"
+                    },
+                    {
+                      "entity": "weather.openweathermap_hourly",
+                      "name": "Probability",
+                      "type": "area",
+                      "opacity": 0.6,
+                      "stroke_width": 2,
+                      "extend_to": false,
+                      "unit": "%",
+                      "yaxis_id": "probability",
+                      "color": "#15aadc",
+                      "show": {
+                        "legend_value": false
+                      },
+                      "data_generator": "return entity.attributes.forecast.map((entry) => {\n  return [new Date(entry.datetime), entry.precipitation_probability];\n});\n"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "title": "Radars",
+              "cards": [
+                {
+                  "type": "iframe",
+                  "url": "https://embed.windy.com/embed2.html?lat=51.046&lon=16.183&detailLat=50.851&detailLon=16.202&width=460&height=460&zoom=9&level=surface&overlay=radar&product=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1",
+                  "aspect_ratio": "100%"
+                },
+                {
+                  "type": "iframe",
+                  "url": "https://www.rainviewer.com/map.html?loc=51.0397,16.1815,9&oFa=0&oC=1&oU=0&oCS=1&oF=0&oAP=0&c=3&o=90&lm=1&layer=radar&sm=1&sn=1&hu=0",
+                  "aspect_ratio": "100%"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "title": "Etc",
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    "sensor.temp_sonoff_one_humidity",
+                    "sensor.temp_sonoff_one_temperature"
+                  ],
+                  "title": "temp_sonoff_one"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

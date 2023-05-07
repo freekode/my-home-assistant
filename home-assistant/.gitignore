@@ -1,4 +1,26 @@
-.storage
+.storage/auth
+.storage/auth_provider.homeassistant
+.storage/core.analytics
+.storage/core.area_registry
+.storage/core.config
+.storage/core.config_entries
+.storage/core.device_registry
+.storage/core.entity_registry
+.storage/core.restore_state
+.storage/core.uuid
+.storage/esphome.*
+.storage/frontend.*
+.storage/hacs.critical
+.storage/hacs.hacs
+.storage/hacs.repositories
+.storage/http
+.storage/http.auth
+.storage/onboarding
+.storage/person
+.storage/repairs.issue_registry
+.storage/trace.saved_traces
+
+custom_components
 
 secrets.yaml
 home-assistant_v2.db*
