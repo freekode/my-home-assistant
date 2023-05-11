@@ -1,1 +1,15 @@
-[]
+- id: '1683621952098'
+  alias: Keep off after power outage
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: light.led_stripe_one
+    from: unavailable
+    to: 'on'
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id: f99fc247fceb92fe30bb044099c5dc63
+  mode: single

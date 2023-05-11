@@ -18,6 +18,16 @@
         "url": "/hacsfiles/platinum-weather-card/platinum-weather-card.js?hacstag=488086721105",
         "type": "module",
         "id": "a8488b3d8cb8412abcbf8b71374463ce"
+      },
+      {
+        "url": "icloud3-event-log-card.js",
+        "type": "module",
+        "id": "bfecde30d6cd4d409d8accb670010996"
+      },
+      {
+        "url": "/hacsfiles/config-template-card/config-template-card.js?hacstag=172177543136",
+        "type": "module",
+        "id": "20795eb0a5384fbbb00a86d22f07bbb3"
       }
     ]
   }

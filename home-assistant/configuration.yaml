@@ -10,11 +10,7 @@ frontend:
 tts:
   - platform: google_translate
 
-logger:
-  logs:
-    custom_components.hacs: debug
-    aiogithubapi: debug
-
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+device_tracker: !include device_tracker.yaml
