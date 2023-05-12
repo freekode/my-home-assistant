@@ -19,9 +19,15 @@
 .storage/person
 .storage/repairs.issue_registry
 .storage/trace.saved_traces
+.storage/icloud
+.storage/icloud3
+.storage/assist_pipeline.pipelines
+.storage/homeassistant.exposed_entities
 
 custom_components
+www
 
 secrets.yaml
 home-assistant_v2.db*
 home-assistant.log*
+icloud3*.log

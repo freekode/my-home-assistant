@@ -29,4 +29,6 @@ devices:
   '0xa4c13837eba81797':
     friendly_name: led_stripe_one
   '0x00124b00226810ff':
-    friendly_name: temp_sonoff_one
+    friendly_name: temp_one
+  '0x00158d000949fac1':
+    friendly_name: temp_two

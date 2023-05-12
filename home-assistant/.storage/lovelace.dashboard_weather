@@ -28,7 +28,7 @@
                   "entity_forecast_max_1": "weather.openweathermap",
                   "entity_forecast_min": "weather.openweathermap",
                   "entity_forecast_min_1": "weather.openweathermap",
-                  "entity_humidity": "sensor.temp_sonoff_one_humidity",
+                  "entity_humidity": "sensor.temp_one_humidity",
                   "entity_pop": "weather.openweathermap",
                   "entity_pop_1": "weather.openweathermap",
                   "entity_pos": "weather.openweathermap",
@@ -36,7 +36,7 @@
                   "entity_summary": "weather.openweathermap",
                   "entity_summary_1": "weather.openweathermap",
                   "entity_sun": "sun.sun",
-                  "entity_temperature": "sensor.temp_sonoff_one_temperature",
+                  "entity_temperature": "sensor.temp_one_temperature",
                   "entity_update_time": "sensor.openweathermap_forecast_time",
                   "entity_wind_bearing": "weather.openweathermap",
                   "entity_wind_speed": "weather.openweathermap",
@@ -67,65 +67,85 @@
                   "update_time_use_attr": false
                 },
                 {
-                  "type": "custom:apexcharts-card",
-                  "header": {
-                    "show": true,
-                    "title": "Precipitation",
-                    "colorize_states": true
-                  },
-                  "graph_span": "2d-2h",
-                  "span": {
-                    "start": "hour"
-                  },
-                  "apex_config": {
-                    "xaxis": {
-                      "labels": {
-                        "format": "dd-MMM"
+                  "type": "custom:config-template-card",
+                  "entities": [],
+                  "card": {
+                    "type": "custom:apexcharts-card",
+                    "header": {
+                      "show": true,
+                      "title": "Precipitation"
+                    },
+                    "cache": true,
+                    "graph_span": "2d-2h",
+                    "span": {
+                      "start": "hour"
+                    },
+                    "apex_config": {
+                      "xaxis": {
+                        "labels": {
+                          "format": "dd-MMM"
+                        },
+                        "tooltip": {
+                          "enabled": false
+                        }
+                      },
+                      "annotations": {
+                        "position": "front",
+                        "xaxis": [
+                          {
+                            "x": "${new Date().setHours(23,59,59)}",
+                            "strokeDashArray": 0,
+                            "borderColor": "#eaba41"
+                          },
+                          {
+                            "x": "${new Date().setHours(23,59,59)+86400000}",
+                            "strokeDashArray": 0,
+                            "borderColor": "#eaba41"
+                          }
+                        ]
                       }
-                    }
-                  },
-                  "yaxis": [
-                    {
-                      "id": "precipitation",
-                      "min": 0,
-                      "opposite": true
                     },
-                    {
-                      "id": "probability"
-                    }
-                  ],
-                  "series": [
-                    {
-                      "entity": "weather.openweathermap_hourly",
-                      "name": "Precipitation",
-                      "type": "column",
-                      "stroke_width": 2,
-                      "curve": "straight",
-                      "extend_to": false,
-                      "unit": "mm",
-                      "yaxis_id": "precipitation",
-                      "color": "#32cd32",
-                      "show": {
-                        "legend_value": false
+                    "yaxis": [
+                      {
+                        "id": "precipitation",
+                        "opposite": true
                       },
-                      "data_generator": "return entity.attributes.forecast.map((entry) => {\n  return [new Date(entry.datetime), entry.precipitation];\n});\n"
-                    },
-                    {
-                      "entity": "weather.openweathermap_hourly",
-                      "name": "Probability",
-                      "type": "area",
-                      "opacity": 0.6,
-                      "stroke_width": 2,
-                      "extend_to": false,
-                      "unit": "%",
-                      "yaxis_id": "probability",
-                      "color": "#15aadc",
-                      "show": {
-                        "legend_value": false
+                      {
+                        "id": "probability",
+                        "min": 0,
+                        "max": 100
+                      }
+                    ],
+                    "series": [
+                      {
+                        "entity": "weather.openweathermap_hourly",
+                        "name": "Precipitation",
+                        "type": "column",
+                        "yaxis_id": "precipitation",
+                        "unit": "mm",
+                        "extend_to": false,
+                        "color": "#32cd32",
+                        "show": {
+                          "legend_value": false
+                        },
+                        "data_generator": "return entity.attributes.forecast.map((entry) => {\n  return [new Date(entry.datetime), entry.precipitation];\n});\n"
                       },
-                      "data_generator": "return entity.attributes.forecast.map((entry) => {\n  return [new Date(entry.datetime), entry.precipitation_probability];\n});\n"
-                    }
-                  ]
+                      {
+                        "entity": "weather.openweathermap_hourly",
+                        "name": "Probability",
+                        "type": "area",
+                        "yaxis_id": "probability",
+                        "unit": "%",
+                        "stroke_width": 2,
+                        "extend_to": false,
+                        "color": "#15aadc",
+                        "show": {
+                          "legend_value": false
+                        },
+                        "data_generator": "return entity.attributes.forecast.map((entry) => {\n  return [new Date(entry.datetime), entry.precipitation_probability];\n});\n"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -152,10 +172,20 @@
                 {
                   "type": "entities",
                   "entities": [
-                    "sensor.temp_sonoff_one_humidity",
-                    "sensor.temp_sonoff_one_temperature"
+                    {
+                      "entity": "sensor.temp_one_humidity"
+                    },
+                    {
+                      "entity": "sensor.temp_one_temperature"
+                    },
+                    {
+                      "entity": "sensor.temp_two_humidity"
+                    },
+                    {
+                      "entity": "sensor.temp_two_temperature"
+                    }
                   ],
-                  "title": "temp_sonoff_one"
+                  "title": "temp_one"
                 }
               ]
             }

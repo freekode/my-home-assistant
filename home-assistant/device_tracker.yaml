@@ -1,0 +1,4 @@
+- platform: ping
+  hosts:
+    evgeny: 192.168.1.92
+    ania: 192.168.1.58
